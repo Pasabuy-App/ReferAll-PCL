@@ -49,7 +49,7 @@ namespace ReferAll.UrlHash
             }
             var content = new FormUrlEncodedContent(dict);
 
-            var response = await client.PostAsync(BaseClass.BaseDomainUrl + "/referall/v1/coupons/create", content);
+            var response = await client.PostAsync(BaseClass.BaseDomainUrl + "/referall/v1/urlhash/create", content);
             response.EnsureSuccessStatusCode();
 
             if (response.IsSuccessStatusCode)
