@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using System.Net.Http;
-using ReferAll.UrlHash.Struck;
+using ReferAll.UrlHash.Struct;
 
 namespace ReferAll.UrlHash
 {

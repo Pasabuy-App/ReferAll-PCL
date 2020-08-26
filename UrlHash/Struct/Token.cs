@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ReferAll.UrlHash.Struck
+namespace ReferAll.UrlHash.Struct
 {
     public class Token
     {
