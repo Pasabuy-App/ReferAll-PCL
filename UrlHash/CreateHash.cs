@@ -35,18 +35,12 @@ namespace ReferAll.UrlHash
         }
         #endregion
         #region Methods
-        public async void Create(string wp_id, string session_key, string title, string info, string value, string exp, Action<bool, string> callback)
+        public async void Create(string wp_id, string session_key, string type, Action<bool, string> callback)
         {
             var dict = new Dictionary<string, string>();
             dict.Add("wpid", wp_id);
             dict.Add("snky", session_key);
-            dict.Add("title", title);
-            dict.Add("info", info);
-            dict.Add("value", value);
-            if (exp != "")
-            {
-                dict.Add("exp", exp);
-            }
+            dict.Add("type", type);
             var content = new FormUrlEncodedContent(dict);
 
             var response = await client.PostAsync(BaseClass.BaseDomainUrl + "/referall/v1/urlhash/create", content);
