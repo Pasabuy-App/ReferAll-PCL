@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using System.Text;
 using Newtonsoft.Json;
 using System.Net.Http;
-using ReferAll.UrlHash.Struct;
+using ReferAll.Controller.Struct;
 
-namespace ReferAll.Coupons
+namespace ReferAll.Visits
 {
-    public class CreateCoupons
+    public class Visits
     {
         #region Fields
         /// <summary>
-        /// Instance of Create Coupons Class.
+        /// Instance of Visit Class.
         /// </summary>
-        private static CreateCoupons instance;
-        public static CreateCoupons Instance
+        private static Visits instance;
+        public static Visits Instance
         {
             get
             {
                 if (instance == null)
-                    instance = new CreateCoupons();
+                    instance = new Visits();
                 return instance;
             }
         }
@@ -29,27 +29,22 @@ namespace ReferAll.Coupons
         /// Web service for communication to our Backend.
         /// </summary>
         HttpClient client;
-        public CreateCoupons()
+        public Visits()
         {
             client = new HttpClient();
         }
         #endregion
-        #region Methods
-        public async void Create(string wp_id, string session_key, string title, string info, string value, string exp, Action<bool, string> callback)
+        #region Insert Methods
+        public async void Insert(string wp_id, string session_key, string mkey, string hash, Action<bool, string> callback)
         {
             var dict = new Dictionary<string, string>();
-            dict.Add("wpid", wp_id);
-            dict.Add("snky", session_key);
-            dict.Add("title", title);
-            dict.Add("info", info);
-            dict.Add("value", value);
-            if (exp != "")
-            {
-                dict.Add("exp", exp);
-            }
+                dict.Add("wpid", wp_id);
+                dict.Add("snky", session_key);
+                dict.Add("mkey", mkey);
+                dict.Add("hash", hash);
             var content = new FormUrlEncodedContent(dict);
 
-            var response = await client.PostAsync(BaseClass.BaseDomainUrl + "/referall/v1/coupons/create", content);
+            var response = await client.PostAsync(BaseClass.BaseDomainUrl + "/referall/v1/visits/insert", content);
             response.EnsureSuccessStatusCode();
 
             if (response.IsSuccessStatusCode)
