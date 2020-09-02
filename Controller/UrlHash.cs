@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Newtonsoft.Json;
 using System.Net.Http;
-using ReferAll.Controller.Struct;
+using ReferAll.Model;
 
-namespace ReferAll.Controller
+namespace ReferAll
 {
     public class UrlHash
     {
         #region Fields
         /// <summary>
-        /// Instance of Hash Class.
+        /// Instance of Hash Class create, delete, validate and insert method.
         /// </summary>
         private static UrlHash instance;
         public static UrlHash Instance
@@ -46,7 +45,7 @@ namespace ReferAll.Controller
                 dict.Add("exp", exp);
             var content = new FormUrlEncodedContent(dict);
 
-            var response = await client.PostAsync(BaseClass.BaseDomainUrl + "/referall/v1/urlhash/create", content);
+            var response = await client.PostAsync(RAHost.Instance.BaseDomain + "/referall/v1/urlhash/create", content);
             response.EnsureSuccessStatusCode();
 
             if (response.IsSuccessStatusCode)
@@ -74,7 +73,7 @@ namespace ReferAll.Controller
                 dict.Add("hash", hash);
             var content = new FormUrlEncodedContent(dict);
 
-            var response = await client.PostAsync(BaseClass.BaseDomainUrl + "/referall/v1/urlhash/delete", content);
+            var response = await client.PostAsync(RAHost.Instance.BaseDomain + "/referall/v1/urlhash/delete", content);
             response.EnsureSuccessStatusCode();
 
             if (response.IsSuccessStatusCode)
@@ -102,7 +101,7 @@ namespace ReferAll.Controller
                 dict.Add("hash", hash);
             var content = new FormUrlEncodedContent(dict);
 
-            var response = await client.PostAsync(BaseClass.BaseDomainUrl + "/referall/v1/urlhash/validate", content);
+            var response = await client.PostAsync(RAHost.Instance.BaseDomain + "/referall/v1/urlhash/validate", content);
             response.EnsureSuccessStatusCode();
 
             if (response.IsSuccessStatusCode)
@@ -121,7 +120,7 @@ namespace ReferAll.Controller
         }
         #endregion
 
-        #region Insert Methods
+        #region Insert Method
         public async void Insert(string wp_id, string session_key, string mkey, string hash, Action<bool, string> callback)
         {
             var dict = new Dictionary<string, string>();
@@ -131,7 +130,7 @@ namespace ReferAll.Controller
                 dict.Add("hash", hash);
             var content = new FormUrlEncodedContent(dict);
 
-            var response = await client.PostAsync(BaseClass.BaseDomainUrl + "/referall/v1/visits/insert", content);
+            var response = await client.PostAsync(RAHost.Instance.BaseDomain + "/referall/v1/visits/insert", content);
             response.EnsureSuccessStatusCode();
 
             if (response.IsSuccessStatusCode)

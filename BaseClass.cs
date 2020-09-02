@@ -1,18 +1,37 @@
-﻿using System;
-
+﻿
 namespace ReferAll
 {
-    public class BaseClass
+    public class RAHost
     {
-        /// <summary>
-        /// Primary base domain url.
-        /// </summary>
-        public static string BaseDomainUrl
+        private static RAHost instance;
+        public static RAHost Instance
         {
             get
             {
-                return "http://localhost/wordpress/wp-json";
+                if (instance == null)
+                    instance = new RAHost();
+                return instance;
             }
         }
+
+        private bool isInitialized = false;
+        private string baseUrl = "http://localhost";
+        public string BaseDomain
+        {
+            get
+            {
+                return baseUrl + "/wp-json";
+            }
+        }
+
+        public void Initialized(string url)
+        {
+            if (!isInitialized)
+            {
+                baseUrl = url;
+                isInitialized = true;
+            }
+        }
+
     }
 }

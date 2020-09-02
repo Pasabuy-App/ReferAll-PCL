@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ReferAll.Controller.Struct
+﻿
+namespace ReferAll.Model
 {
     public class Token
     {
